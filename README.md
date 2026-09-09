@@ -6,6 +6,17 @@ A native macOS document workspace built with SwiftUI, AppKit, Vision, PDFKit, an
 
 This is a functional portfolio MVP, with no account, hosted backend, API key, telemetry, external package dependency, or model-service bill. Its AI features are local OCR and semantic retrieval. It **does not generate conversational answers** or claim that relevance measures correctness.
 
+[Preview release v0.1.0](https://github.com/Poojan-Desai/lumadesk/releases/tag/v0.1.0) · [Source code](Sources) · [Native macOS CI](https://github.com/Poojan-Desai/lumadesk/actions/workflows/ci.yml) · [Demo walkthrough](PORTFOLIO.md)
+
+## Engineering highlights
+
+- **Native macOS product:** SwiftUI and AppKit workspace with PDFKit text extraction, Vision OCR, and Markdown export with source/page citations.
+- **Local information retrieval:** BM25 keyword ranking combined with NaturalLanguage sentence embeddings and cosine similarity; keyword search remains available when semantic search is unavailable.
+- **Responsive architecture:** actor-isolated retrieval, OCR and embedding work off the main actor, and debounced, cancellation-aware search presentation.
+- **Verification:** 32 shared validation assertions covering ranking, provenance, persistence, document import, and real OCR fixtures. [GitHub CI passed](https://github.com/Poojan-Desai/lumadesk/actions/runs/34150903363) for the preview source revision; the workflow link above shows current status.
+
+**Release status:** v0.1.0 is a portfolio preview for Apple silicon and macOS 14+. The downloadable app has an ad-hoc signature; it is not Developer ID signed or notarized. See [build instructions](#build-a-launchable-app) for the reproducible source build and distribution limitations.
+
 ## Quick start
 
 Requirements: macOS 14 or newer; Swift 5.10 or newer; Apple Command Line Tools or Xcode. The provided binary is built for Apple silicon. Intel users can build from source on an Intel Mac.
