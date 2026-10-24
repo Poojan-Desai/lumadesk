@@ -26,7 +26,7 @@ Explicit import -> document snapshots -> WorkspaceModel
 ## Verification
 
 - Baseline: 59/59 shared assertions.
-- Current: 72/72 shared assertions, including real PDFKit and Vision OCR fixtures, retrieval, file persistence and citations.
+- Current: 73/73 shared assertions, including real PDFKit and Vision OCR fixtures, retrieval, file persistence and citations.
 - Benchmark CLI: 22/22 checks; full native LumaDesk and release benchmark build pass.
 - `swift test` was attempted. The active `/Library/Developer/CommandLineTools` installation has no XCTest platform; it reports `error: XCTest not available`. No Xcode app is installed. The same shared assertion code passed through LumaDeskChecks.
 - Release retrieval rerun: original synthetic CC0 fixture, 16 documents, 17 passages, 13 judged queries plus 2 controls, five repetitions/one warmup. Apple M3 Pro / Mac15,6 / 18 GiB / macOS 14.4 arm64. BM25 Recall@5 1.0000 and NDCG@5 0.9928; cosine 0.9615 / 0.8769; hybrid 1.0000 / 1.0000. These are fixture diagnostics, not general search-quality or improvement claims. New raw timings and hardware/RSS are supplied in the evidence report.
@@ -36,5 +36,7 @@ Explicit import -> document snapshots -> WorkspaceModel
 Run `swift run LumaDesk`, choose Try sample library, search for privacy and inspect the page/extraction label. Remove that source; its result disappears. Run `swift run LumaDeskChecks` to reproduce the malformed snapshot/reopen/citation mutation fixtures without reading personal documents. Tests create and remove temporary original synthetic fixtures.
 
 ## Limits and unfinished directive work
+
+Independent delivery review found that text character limits did not bound encoded metadata: a title over 20 MB could be saved successfully and rejected on reopen. Save now enforces the same encoded byte limit as load before creating any temporary file or replacing the existing library. A regression first failed against the prior code (72/73 checks), then passed with this guard, including preservation of the prior readable library.
 
 No automatic watching of external changes, rename, deletion, or relocation exists. Import creates a snapshot and intentionally forgets its path. A deliberate reimport is a separate source unless its existing title and extracted text match. There is no source-refresh UI, benchmark corpus expansion, import cancellation/progress redesign, security-scoped bookmark persistence, app sandbox, or broad accessibility certification. BM25/cosine/hybrid benchmarking already existed in the baseline; this increment reruns it without claiming a performance optimization. No signed/notarized distribution or remote release was attempted.

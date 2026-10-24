@@ -28,6 +28,9 @@ extension ValidationSuite {
             check("Oversized persisted documents are rejected", rejected([oversized]))
             do { try store.save([document, document]); check("Rejected writes preserve the previous library", false) }
             catch { check("Rejected writes preserve the previous library", try store.load() == [document]) }
+            let oversizedMetadata = LibraryDocument(title: String(repeating: "x", count: 20_000_001), kind: "TXT", pages: document.pages)
+            do { try store.save([oversizedMetadata]); check("Oversized encoded snapshots preserve the readable library", false) }
+            catch { check("Oversized encoded snapshots preserve the readable library", try store.load() == [document]) }
             try Data("[{broken".utf8).write(to: store.url)
             let damaged = try Data(contentsOf: store.url)
             do { _ = try store.load(); check("Corrupt snapshots are preserved for recovery", false) }
