@@ -4,13 +4,14 @@ import PackageDescription
 let package = Package(
     name: "LumaDesk",
     platforms: [.macOS(.v14)],
-    products: [.executable(name: "LumaDesk", targets: ["LumaDesk"]), .executable(name: "LumaDeskChecks", targets: ["LumaDeskChecks"]), .library(name: "LumaCore", targets: ["LumaCore"])],
+    products: [.executable(name: "LumaDesk", targets: ["LumaDesk"]), .executable(name: "LumaDeskChecks", targets: ["LumaDeskChecks"]), .library(name: "LumaCore", targets: ["LumaCore"]), .executable(name: "LumaBenchmark", targets: ["LumaBenchmark"])],
     targets: [
         .target(name: "LumaCore"),
         .target(name: "LumaServices", dependencies: ["LumaCore"]),
         .executableTarget(name: "LumaDesk", dependencies: ["LumaCore", "LumaServices"]),
         .target(name: "LumaValidation", dependencies: ["LumaCore", "LumaServices"], path: "Tests/LumaValidation"),
         .executableTarget(name: "LumaDeskChecks", dependencies: ["LumaValidation"]),
+        .executableTarget(name: "LumaBenchmark", dependencies: ["LumaCore", "LumaServices"], resources: [.copy("Fixtures")]),
         .testTarget(name: "LumaCoreTests", dependencies: ["LumaValidation"])
     ]
 )

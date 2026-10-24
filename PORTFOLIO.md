@@ -27,11 +27,11 @@
 
 ## Verification
 
-The included shared validation suite checks actual generated PDFs and images through PDFKit and Vision, then verifies retrieval and deletion. It also covers deterministic ranking and edge cases. Full VoiceOver, latency benchmarks across hardware, retrieval evaluation on a representative public corpus, and production security review remain future work.
+The shared validation suite runs 59 assertions against generated PDFs and images through PDFKit and Vision, deterministic ranking, hand-calculated retrieval metrics, unavailable-model fallback, and stale-vector invalidation after text changes. A further 22 CLI checks verify reports, argument handling, deterministic BM25, and candidate coverage when one document has many passages. The benchmark compares BM25, cosine, and hybrid modes on 16 original synthetic documents and 15 queries, with hardware and model coverage recorded. These are engineering regression fixtures, not representative accuracy evidence; see [BENCHMARK.md](BENCHMARK.md). Full VoiceOver, latency benchmarks across hardware, representative public-corpus evaluation, and production security review remain future work.
 
 ## Next milestones
 
-1. Measure recall@k and nDCG on a consented public corpus before tuning ranking weights.
+1. Extend the existing Recall@5/NDCG@5 harness with a licensed, representative corpus and independent judgments before tuning ranking weights.
 2. Add mixed-page image OCR and searchable bounding boxes for visual source highlighting.
 3. Move library storage to a versioned database with incremental index updates.
 4. Add App Sandbox entitlements, Developer ID signing, notarization, and a reproducible release workflow.

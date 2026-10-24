@@ -19,3 +19,14 @@ jobs:
         run: swift test
       - name: Run standalone integration checks
         run: swift run LumaDeskChecks
+      - name: Build retrieval benchmark
+        run: swift build --product LumaBenchmark
+      - name: Validate benchmark CLI and unavailable-model behavior
+        run: python3 scripts/check-benchmark.py
+      - name: Record local-model retrieval smoke report
+        run: swift run LumaBenchmark --repetitions 2 --warmups 1 --output benchmark-report.json
+      - name: Upload retrieval smoke report
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-smoke-report
+          path: benchmark-report.json

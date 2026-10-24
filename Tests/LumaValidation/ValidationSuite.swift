@@ -59,7 +59,7 @@ public enum ValidationSuite {
             let restored = try JSONDecoder().decode([LibraryDocument].self, from: data)
             check("Persistence round trip retains complete source content", restored == documents)
         } catch { check("Persistence round trip retains complete source content", false, error.localizedDescription) }
-        return results
+        return results + runEvaluation()
     }
 
     @MainActor
@@ -127,6 +127,20 @@ public enum ValidationSuite {
             let count = await engine.rebuild([document, imageDocument])
             let response = await engine.search("documents private", documentID: imageDocument.id)
             check("Retrieval engine obeys document scope", !response.hits.isEmpty && response.hits.allSatisfy { $0.passage.documentID == imageDocument.id }, "Mode: \(response.mode); embedded passages: \(count)")
+            let replacement = LibraryDocument(id: document.id, title: document.title, kind: document.kind, pages: [SourcePage(number: 1, text: "この文書は日本語で書かれています。駅から図書館まで歩きます。静かな部屋で本を読みます。", extraction: "Original text")])
+            _ = await engine.rebuild([replacement, imageDocument])
+            let replaced = await engine.search("private documents", documentID: document.id, mode: .semantic)
+            check("Edited passage text invalidates vectors under stable IDs", replaced.eligiblePassages == 1 && replaced.embeddedPassages == 0 && replaced.hits.isEmpty, "Original embedded passages: \(count); replacement is Japanese and excluded from the English semantic index")
+            let keywordEngine = RetrievalEngine(semanticEnabled: false)
+            _ = await keywordEngine.rebuild([document, imageDocument])
+            let coverage = await keywordEngine.coverage()
+            check("Disabled semantic index reports zero coverage", coverage.passages == 2 && coverage.embeddedPassages == 0 && !coverage.modelAvailable && coverage.modelRevision == nil && coverage.vectorDimension == nil)
+            let fallback = await keywordEngine.search("documents private", documentID: imageDocument.id)
+            check("Missing model preserves scoped hybrid keyword retrieval", !fallback.hits.isEmpty && fallback.mode == "Keyword search" && !fallback.queryVectorAvailable && fallback.embeddedPassages == 0 && fallback.eligiblePassages == 1 && fallback.hits.allSatisfy { $0.passage.documentID == imageDocument.id })
+            let unavailable = await keywordEngine.search("documents private", documentID: nil, mode: .semantic)
+            check("Semantic baseline never silently substitutes keywords", unavailable.hits.isEmpty && unavailable.mode == "Semantic unavailable")
+            let bm25 = await keywordEngine.search("documents private", documentID: nil, mode: .bm25, limit: 1)
+            check("Engine exposes bounded pure BM25 without query vectors", bm25.hits.count == 1 && bm25.mode == "BM25 only" && !bm25.queryVectorAvailable)
             _ = await engine.rebuild([])
             let removed = await engine.search("documents", documentID: nil)
             check("Removing sources clears searchable index", removed.hits.isEmpty)

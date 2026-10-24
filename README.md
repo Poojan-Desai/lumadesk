@@ -13,7 +13,8 @@ This is a functional portfolio MVP, with no account, hosted backend, API key, te
 - **Native macOS product:** SwiftUI and AppKit workspace with PDFKit text extraction, Vision OCR, and Markdown export with source/page citations.
 - **Local information retrieval:** BM25 keyword ranking combined with NaturalLanguage sentence embeddings and cosine similarity; keyword search remains available when semantic search is unavailable.
 - **Responsive architecture:** actor-isolated retrieval, OCR and embedding work off the main actor, and debounced, cancellation-aware search presentation.
-- **Verification:** 32 shared validation assertions covering ranking, provenance, persistence, document import, and real OCR fixtures. [GitHub CI passed](https://github.com/Poojan-Desai/lumadesk/actions/runs/34150903363) for the preview source revision; the workflow link above shows current status.
+- **Verification:** 59 shared validation assertions covering ranking, metric calculations, provenance, persistence, document import, and real OCR fixtures; 22 black-box benchmark CLI checks. [GitHub CI passed](https://github.com/Poojan-Desai/lumadesk/actions/runs/34150903363) for the original preview source revision; the new benchmark checks have been verified locally and await a remote CI run.
+- **Reproducible retrieval evaluation:** compare pure BM25, pure cosine, and the app's hybrid ranker on a versioned, original synthetic corpus; export graded Recall@5/NDCG@5, query timings, model coverage, hardware metadata, and a corpus checksum. See [evaluation protocol and limitations](BENCHMARK.md).
 
 **Release status:** v0.1.0 is a portfolio preview for Apple silicon and macOS 14+. The downloadable app has an ad-hoc signature; it is not Developer ID signed or notarized. See [build instructions](#build-a-launchable-app) for the reproducible source build and distribution limitations.
 
@@ -36,13 +37,17 @@ The app is intentionally a local workspace, not a server. No backend or network 
 # Works with Command Line Tools alone; exits nonzero on any failure.
 swift run LumaDeskChecks
 
+# Validates the benchmark's JSON contract, modes, errors and candidate handling.
+swift build --product LumaBenchmark
+python3 scripts/check-benchmark.py
+
 # Runs the same shared validation suite when full Xcode/XCTest is installed.
 swift test
 ```
 
-The shared suite performs 32 assertions covering segmentation boundaries and malformed parameters; Unicode token normalization; BM25 and semantic ranking; invalid vectors and empty queries; stable source/page provenance; JSON round trips; actual UTF-8/PDF import; actual Vision OCR on synthetic image and scanned-PDF fixtures; document-scoped retrieval; and deleted-source index removal. It never reads personal documents. Temporary generated fixtures are removed afterward.
+The shared suite performs 59 assertions covering segmentation boundaries and malformed parameters; Unicode token normalization; BM25 and semantic ranking; invalid vectors and empty queries; stable source/page provenance; JSON round trips; actual UTF-8/PDF import; actual Vision OCR on synthetic image and scanned-PDF fixtures; document-scoped retrieval; edited-passage vector invalidation; and deleted-source index removal. Evaluation checks include hand-calculated graded metrics, document deduplication, corpus validation, and model-unavailable behavior. It never reads personal documents. Temporary generated fixtures are removed afterward.
 
-On the development Mac, all **32/32 checks passed**, including real local embeddings and OCR. `swift test` was also attempted, but this machine's Command Line Tools installation lacks XCTest (`error: XCTest not available`). The standalone executable runs the same validation code and passed. This is an environment limitation, not a claim that XCTest ran.
+On the development Mac, all **59/59 shared checks and 22/22 benchmark CLI checks passed**, including real local embeddings and OCR. `swift test` was also attempted, but this machine's Command Line Tools installation lacks XCTest (`error: XCTest not available`). The standalone executable runs the same validation code and passed. This is an environment limitation, not a claim that XCTest ran.
 
 ## Build a launchable app
 

@@ -1,0 +1,1121 @@
+{
+  "architecture" : "arm64",
+  "buildConfiguration" : "release",
+  "corpusLicense" : "CC0-1.0",
+  "corpusName" : "Original English retrieval plumbing fixture v1",
+  "corpusProvenance" : "Original manually authored synthetic documents and graded document-level judgments, October 19 2026. No private or third-party source documents. Small fixture verifies evaluation plumbing, not representative search quality. Unlisted corpus document judgments are zero. Grades: 0 irrelevant, 1 supporting, 2 relevant, 3 directly relevant.",
+  "corpusSHA256" : "ad93b9d0a99312cbad19c8f4a70cee565b302adc2dbc8c8231929765358295eb",
+  "cpuBrand" : "Apple M3 Pro",
+  "documentCount" : 16,
+  "generatedAt" : "2026-10-24T17:11:24Z",
+  "hardwareModel" : "Mac15,6",
+  "logicalProcessors" : 12,
+  "modes" : [
+    {
+      "coverage" : {
+        "embeddedPassages" : 0,
+        "modelAvailable" : false,
+        "passages" : 17
+      },
+      "evaluatedQueries" : 13,
+      "fallbackQueries" : 0,
+      "indexMilliseconds" : 0.538917,
+      "meanNDCGAt5" : 0.9928221230736252,
+      "meanRecallAt5" : 1,
+      "mode" : "bm25",
+      "modelInitializationMilliseconds" : 0.014792,
+      "queries" : [
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q01",
+          "milliseconds" : [
+            1.694833,
+            1.513542,
+            1.356125,
+            1.461292,
+            1.654959
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000002"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q02",
+          "milliseconds" : [
+            3.016,
+            1.647084,
+            1.532917,
+            1.566333,
+            1.393459
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q03",
+          "milliseconds" : [
+            1.845542,
+            1.580625,
+            2.01375,
+            1.561583,
+            1.49425
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000006"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q04",
+          "milliseconds" : [
+            2.596417,
+            2.121292,
+            1.759875,
+            1.993792,
+            1.895708
+          ],
+          "ndcgAt5" : 0.9680147827042069,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000016"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q05",
+          "milliseconds" : [
+            2.046417,
+            1.689583,
+            1.60675,
+            1.619083,
+            1.661084
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q06",
+          "milliseconds" : [
+            1.55625,
+            1.637416,
+            1.67975,
+            1.661958,
+            1.728625
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000006",
+            "00000000-0000-0000-0000-000000000015"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q07",
+          "milliseconds" : [
+            1.559875,
+            1.608833,
+            1.619041,
+            1.723334,
+            1.552709
+          ],
+          "ndcgAt5" : 0.95583058934618,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000015",
+            "00000000-0000-0000-0000-000000000013",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000002"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q08",
+          "milliseconds" : [
+            1.681916,
+            2.010208,
+            1.745375,
+            1.892042,
+            1.603
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000008",
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000006"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q09",
+          "milliseconds" : [
+            1.36325,
+            1.403542,
+            1.3245,
+            1.608875,
+            1.484
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q10",
+          "milliseconds" : [
+            1.396083,
+            1.417209,
+            1.399875,
+            1.658584,
+            1.708375
+          ],
+          "ndcgAt5" : 0.9828422279067397,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000012"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q11",
+          "milliseconds" : [
+            1.532083,
+            1.590667,
+            1.639625,
+            1.566584,
+            1.557625
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000006",
+            "00000000-0000-0000-0000-000000000008"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q12",
+          "milliseconds" : [
+            1.439,
+            1.513625,
+            1.431333,
+            1.4705,
+            1.3965
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "q13",
+          "milliseconds" : [
+            1.537,
+            1.493333,
+            1.583917,
+            1.524125,
+            1.703459
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000014"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "no-answer",
+          "milliseconds" : [
+            2.212292,
+            1.909833,
+            1.673416,
+            1.765333,
+            2.276042
+          ],
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "status" : "no-relevant-judgments"
+        },
+        {
+          "effectiveMode" : "BM25 only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 0,
+          "id" : "empty",
+          "milliseconds" : [
+            0.009542,
+            0.006834,
+            0.00575,
+            0.005792,
+            0.005625
+          ],
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+
+          ],
+          "status" : "no-relevant-judgments"
+        }
+      ],
+      "queryCount" : 15,
+      "queryMedianMilliseconds" : 1.603,
+      "queryP95Milliseconds" : 2.212292,
+      "semanticQueries" : 0,
+      "status" : "completed"
+    },
+    {
+      "coverage" : {
+        "embeddedPassages" : 17,
+        "modelAvailable" : true,
+        "modelRevision" : 1,
+        "passages" : 17,
+        "vectorDimension" : 512
+      },
+      "evaluatedQueries" : 13,
+      "fallbackQueries" : 0,
+      "indexMilliseconds" : 362.724042,
+      "meanNDCGAt5" : 0.8768856959686102,
+      "meanRecallAt5" : 0.9615384615384616,
+      "mode" : "semantic",
+      "modelInitializationMilliseconds" : 64.223208,
+      "queries" : [
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q01",
+          "milliseconds" : [
+            5.384792,
+            5.520042,
+            5.348709,
+            5.608667,
+            5.780416
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000011"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q02",
+          "milliseconds" : [
+            6.155459,
+            5.328333,
+            5.679208,
+            5.588792,
+            5.429083
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000009"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q03",
+          "milliseconds" : [
+            6.422625,
+            6.749,
+            6.625042,
+            6.496834,
+            6.317375
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000002"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q04",
+          "milliseconds" : [
+            7.095083,
+            6.542708,
+            6.548,
+            7.019375,
+            7.28025
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000010"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q05",
+          "milliseconds" : [
+            6.544541,
+            6.970834,
+            6.683541,
+            6.342958,
+            6.421791
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000008",
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q06",
+          "milliseconds" : [
+            7.087041,
+            7.301833,
+            7.078125,
+            7.383333,
+            6.655167
+          ],
+          "ndcgAt5" : 0.08268058728704288,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000015",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000004"
+          ],
+          "recallAt5" : 0.5,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q07",
+          "milliseconds" : [
+            5.975584,
+            6.636666,
+            6.323459,
+            6.885584,
+            6.973583
+          ],
+          "ndcgAt5" : 0.8339912323981488,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000015",
+            "00000000-0000-0000-0000-000000000008",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000004"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q08",
+          "milliseconds" : [
+            5.797959,
+            5.984916,
+            6.791875,
+            6.151125,
+            6.393875
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000008",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000010"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q09",
+          "milliseconds" : [
+            6.093542,
+            5.571417,
+            6.164792,
+            5.724417,
+            5.952042
+          ],
+          "ndcgAt5" : 0.5,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000012"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q10",
+          "milliseconds" : [
+            5.947917,
+            5.898583,
+            6.224334,
+            6.686708,
+            6.702917
+          ],
+          "ndcgAt5" : 0.9828422279067397,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000002"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q11",
+          "milliseconds" : [
+            6.509875,
+            6.884542,
+            6.604375,
+            6.903167,
+            7.105041
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000003"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q12",
+          "milliseconds" : [
+            5.893209,
+            5.986834,
+            5.500791,
+            5.792792,
+            5.649208
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000008",
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q13",
+          "milliseconds" : [
+            6.958125,
+            6.969875,
+            7.145083,
+            8.286958,
+            7.410417
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000010"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic only",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "no-answer",
+          "milliseconds" : [
+            7.911167,
+            6.659792,
+            5.867917,
+            6.171166,
+            6.398667
+          ],
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000005"
+          ],
+          "status" : "no-relevant-judgments"
+        },
+        {
+          "effectiveMode" : "Semantic unavailable",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "empty",
+          "milliseconds" : [
+            0.250584,
+            0.221958,
+            0.214,
+            0.208125,
+            0.203667
+          ],
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+
+          ],
+          "status" : "unavailable"
+        }
+      ],
+      "queryCount" : 15,
+      "queryMedianMilliseconds" : 6.393875,
+      "queryP95Milliseconds" : 7.383333,
+      "semanticQueries" : 14,
+      "status" : "completed"
+    },
+    {
+      "coverage" : {
+        "embeddedPassages" : 17,
+        "modelAvailable" : true,
+        "modelRevision" : 1,
+        "passages" : 17,
+        "vectorDimension" : 512
+      },
+      "evaluatedQueries" : 13,
+      "fallbackQueries" : 1,
+      "indexMilliseconds" : 310.761625,
+      "meanNDCGAt5" : 1,
+      "meanRecallAt5" : 1,
+      "mode" : "hybrid",
+      "modelInitializationMilliseconds" : 0.714375,
+      "queries" : [
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q01",
+          "milliseconds" : [
+            5.756709,
+            6.103958,
+            5.833709,
+            5.652333,
+            5.274833
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000002"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q02",
+          "milliseconds" : [
+            5.865666,
+            6.62625,
+            6.671,
+            6.561375,
+            7.671958
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q03",
+          "milliseconds" : [
+            7.044417,
+            6.823625,
+            7.110375,
+            6.367375,
+            6.010958
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000008"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q04",
+          "milliseconds" : [
+            7.405125,
+            7.467917,
+            6.144125,
+            6.605458,
+            7.077875
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000001",
+            "00000000-0000-0000-0000-000000000014"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q05",
+          "milliseconds" : [
+            6.209791,
+            6.030708,
+            6.362875,
+            6.5185,
+            6.835
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000012"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q06",
+          "milliseconds" : [
+            6.482167,
+            6.394917,
+            7.04025,
+            6.932459,
+            7.203542
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000006",
+            "00000000-0000-0000-0000-000000000015"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q07",
+          "milliseconds" : [
+            6.500791,
+            6.630166,
+            6.960209,
+            6.874916,
+            7.067292
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000015",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000013",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000008"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q08",
+          "milliseconds" : [
+            6.157375,
+            6.951084,
+            6.500958,
+            6.331083,
+            6
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000008",
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000006"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q09",
+          "milliseconds" : [
+            5.874042,
+            5.65325,
+            5.450375,
+            5.249917,
+            6.135625
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000003",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000014"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q10",
+          "milliseconds" : [
+            6.131417,
+            6.182917,
+            6.068459,
+            6.009208,
+            6.075709
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000010",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000009"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q11",
+          "milliseconds" : [
+            6.246291,
+            6.627584,
+            6.096333,
+            6.501875,
+            6.602333
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000011",
+            "00000000-0000-0000-0000-000000000009",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000002",
+            "00000000-0000-0000-0000-000000000008"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q12",
+          "milliseconds" : [
+            4.873792,
+            4.96075,
+            4.713833,
+            5.118583,
+            4.697041
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000014",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000007"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "q13",
+          "milliseconds" : [
+            6.924833,
+            6.331459,
+            6.720792,
+            6.36525,
+            6.347667
+          ],
+          "ndcgAt5" : 1,
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000016",
+            "00000000-0000-0000-0000-000000000004",
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000012",
+            "00000000-0000-0000-0000-000000000014"
+          ],
+          "recallAt5" : 1,
+          "status" : "evaluated"
+        },
+        {
+          "effectiveMode" : "Semantic + keyword",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "no-answer",
+          "milliseconds" : [
+            5.897625,
+            5.436,
+            5.96925,
+            5.999333,
+            6.224375
+          ],
+          "queryVectorAvailable" : true,
+          "rankedDocumentIDs" : [
+            "00000000-0000-0000-0000-000000000005",
+            "00000000-0000-0000-0000-000000000007",
+            "00000000-0000-0000-0000-000000000014"
+          ],
+          "status" : "no-relevant-judgments"
+        },
+        {
+          "effectiveMode" : "Keyword search",
+          "eligiblePassages" : 17,
+          "embeddedPassages" : 17,
+          "id" : "empty",
+          "milliseconds" : [
+            0.188042,
+            0.180542,
+            0.189084,
+            0.208375,
+            0.177333
+          ],
+          "queryVectorAvailable" : false,
+          "rankedDocumentIDs" : [
+
+          ],
+          "status" : "no-relevant-judgments"
+        }
+      ],
+      "queryCount" : 15,
+      "queryMedianMilliseconds" : 6.224375,
+      "queryP95Milliseconds" : 7.203542,
+      "semanticQueries" : 14,
+      "status" : "completed"
+    }
+  ],
+  "operatingSystem" : "Version 14.4 (Build 23E214)",
+  "peakProcessRSSBytes" : 90357760,
+  "physicalMemoryBytes" : 19327352832,
+  "policy" : "document-dedup-first-seen; k=5; recall=positive-doc-recall; DCG=(2^grade-1)\/log2(rank+1); ideal=all-positive-judgments; undefined-quality-metrics=omitted; semantic=cosine-all-valid-vectors; hybrid=shipped-v1; raw-BM25(k1=1.2,b=0.75); query-timing=actor+query-embedding+rank; index-timing=segmentation+passage-embedding; peakRSS=whole-process-lifetime-bytes",
+  "queryCount" : 15,
+  "repetitions" : 5,
+  "schema" : "lumadesk-benchmark-report\/v1",
+  "semanticsDisabled" : false,
+  "warmups" : 1
+}

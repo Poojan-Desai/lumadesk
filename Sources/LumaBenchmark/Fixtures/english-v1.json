@@ -1,0 +1,281 @@
+{
+  "schema": "lumadesk-evaluation/v1",
+  "name": "Original English retrieval plumbing fixture v1",
+  "provenance": "Original manually authored synthetic documents and graded document-level judgments, October 19 2026. No private or third-party source documents. Small fixture verifies evaluation plumbing, not representative search quality. Unlisted corpus document judgments are zero. Grades: 0 irrelevant, 1 supporting, 2 relevant, 3 directly relevant.",
+  "license": "CC0-1.0",
+  "documents": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "title": "Bicycle puncture repair",
+      "pages": [
+        {
+          "number": 1,
+          "text": "A bicycle tire that loses air may have a punctured inner tube. Remove the wheel, release the remaining air, and lift the tire bead with a plastic lever. Locate the hole, roughen the tube, apply a patch, and let the adhesive cure before inflating. Check the tire for embedded glass before replacing the wheel."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "title": "Bicycle chain maintenance",
+      "pages": [
+        {
+          "number": 1,
+          "text": "A bicycle chain needs cleaning and a small amount of lubricant on each roller. Wipe away excess oil so it does not collect road grit. A worn chain can damage the cassette. Measure chain stretch with a gauge before buying replacement parts. This procedure does not repair a leaking tire."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "title": "Lentil pantry supper",
+      "pages": [
+        {
+          "number": 1,
+          "text": "For a simple lentil stew, rinse dried lentils and simmer them in water with onion, carrot, tomatoes, and cumin. Cook until tender, then season with lemon and salt. Red lentils break down quickly while green lentils keep their shape. Refrigerate leftovers promptly in shallow containers."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000004",
+      "title": "Commuter train tickets",
+      "pages": [
+        {
+          "number": 1,
+          "text": "A commuter can purchase a rail ticket before boarding or use a stored digital pass. Check the destination and departure platform because express trains may skip small stations. An off-peak ticket can have time restrictions. Retain the ticket until leaving the destination station. A canceled train may require a different connection."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000005",
+      "title": "Meeting decisions and owners",
+      "pages": [
+        {
+          "number": 1,
+          "text": "Meeting notes should distinguish a decision from an unresolved question. Record the decision, the person responsible for follow-up, and a due date. Send the action list to attendees after the discussion. A named owner makes the next step easier to track than an ambiguous promise that someone will handle it."
+        },
+        {
+          "number": 2,
+          "text": "At the next meeting, review the outstanding action list before introducing new topics. Update an owner or due date explicitly rather than silently erasing an unfinished task. A decision log records why a choice was made and which alternatives were considered."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000006",
+      "title": "Encrypted drive recovery",
+      "pages": [
+        {
+          "number": 1,
+          "text": "An encrypted drive requires a password or recovery key to unlock its contents. Keep a recovery key in a secure separate location. Losing every valid credential can make the stored files inaccessible. Do not email a recovery secret in plain text. Encryption protects confidentiality but does not replace having an independent backup."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000007",
+      "title": "Versioned file backups",
+      "pages": [
+        {
+          "number": 1,
+          "text": "A backup should preserve previous versions of important files on a separate storage device. Test restoring a document before relying on the backup process. Disconnect or protect at least one copy from accidental deletion and malicious changes. Backups restore lost content; they do not by themselves prevent another person from reading an unencrypted disk."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000008",
+      "title": "Readable scanned documents",
+      "pages": [
+        {
+          "number": 1,
+          "text": "For better optical character recognition, scan a document in even light and keep the page flat. Avoid shadows, glare, motion blur, and a tilted camera. Small print may need a higher resolution image. After extracting text, compare names and numbers with the original page because recognition software can make mistakes."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000009",
+      "title": "Basil in a balcony garden",
+      "pages": [
+        {
+          "number": 1,
+          "text": "Basil grows well in a container with drainage holes, warm sunlight, and consistently moist soil. Water the soil rather than soaking the leaves. Pinch off the growing tips to encourage branching. Cold nights can damage the plant, so bring the pot indoors before frost. Yellow leaves may indicate excessive watering."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000010",
+      "title": "Bread dough fermentation",
+      "pages": [
+        {
+          "number": 1,
+          "text": "Bread dough rises when yeast consumes available sugars and releases gas. Allow the dough to expand before shaping, then let the shaped loaf proof again. A cool room slows fermentation. Stretching and folding strengthens the dough. Bake in a preheated oven until the crust is firm and the interior has set."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000011",
+      "title": "Telescope observing plan",
+      "pages": [
+        {
+          "number": 1,
+          "text": "For a clear view through a telescope, choose a dark site away from street lights and wait for your eyes to adjust. Start with a low magnification eyepiece to find the target. A stable mount reduces shaking. Clouds, city glare, and atmospheric turbulence can obscure faint objects even when the optics are clean."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000012",
+      "title": "Gluten-free quick bread",
+      "pages": [
+        {
+          "number": 1,
+          "text": "A gluten-free quick bread uses flour alternatives and a chemical raising agent instead of a developed wheat gluten network. Follow the specified binder and liquid quantities. Baking powder starts releasing gas when mixed and heated. Transfer the batter to its pan without a long yeast fermentation step."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000013",
+      "title": "Laptop battery care",
+      "pages": [
+        {
+          "number": 1,
+          "text": "A laptop battery ages with repeated charging cycles and heat. Use a charger with the correct electrical rating and keep ventilation openings clear. A swollen battery needs professional replacement. Saving work before the battery is empty avoids losing unsaved changes, but battery care is separate from a reliable file backup strategy."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000014",
+      "title": "Cash expense receipts",
+      "pages": [
+        {
+          "number": 1,
+          "text": "An expense report connects each claimed purchase to a dated receipt and a business purpose. Record the merchant, amount, currency, and relevant category. Reconcile the total against the reimbursement policy before submitting. A missing receipt should be explained rather than recreated with invented details."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000015",
+      "title": "Restoring a deleted document",
+      "pages": [
+        {
+          "number": 1,
+          "text": "If a document was deleted accidentally, first check the trash and any available version history. Stop writing new data to a drive when recovery of deleted content is important. Restore a previous copy from a tested backup if one exists. A drive recovery key unlocks encryption but cannot recreate bytes that were overwritten."
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000016",
+      "title": "Rail journey accessibility",
+      "pages": [
+        {
+          "number": 1,
+          "text": "Before a train journey, check whether the departure and arrival stations offer step-free access. An elevator may be temporarily unavailable. Ask the operator about boarding assistance and allow time for transfers. An accessible route may differ from the fastest connection shown on a timetable."
+        }
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "q01",
+      "text": "How do I patch a punctured bicycle inner tube?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000001": 3,
+        "00000000-0000-0000-0000-000000000002": 1
+      }
+    },
+    {
+      "id": "q02",
+      "text": "What should I clean and lubricate on a bicycle chain?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000002": 3
+      }
+    },
+    {
+      "id": "q03",
+      "text": "How can I cook a filling meal with dried lentils and vegetables?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000003": 3
+      }
+    },
+    {
+      "id": "q04",
+      "text": "Where should I check the platform and restrictions on a commuter rail ticket?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000004": 3,
+        "00000000-0000-0000-0000-000000000016": 1
+      }
+    },
+    {
+      "id": "q05",
+      "text": "How should meeting notes assign responsibility and deadlines for follow-up?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000005": 3
+      }
+    },
+    {
+      "id": "q06",
+      "text": "What happens if I lose the password and recovery key for an encrypted drive?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000006": 3,
+        "00000000-0000-0000-0000-000000000015": 1
+      }
+    },
+    {
+      "id": "q07",
+      "text": "How can I recover an accidentally deleted file from an earlier saved copy?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000015": 3,
+        "00000000-0000-0000-0000-000000000007": 2
+      }
+    },
+    {
+      "id": "q08",
+      "text": "How can I reduce glare and improve recognition when photographing printed pages?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000008": 3
+      }
+    },
+    {
+      "id": "q09",
+      "text": "How should I water and protect basil growing in a pot?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000009": 3
+      }
+    },
+    {
+      "id": "q10",
+      "text": "Why is my yeast dough taking longer to rise in a cold kitchen?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000010": 3,
+        "00000000-0000-0000-0000-000000000012": 1
+      }
+    },
+    {
+      "id": "q11",
+      "text": "How can I see faint stars through a telescope near bright street lights?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000011": 3
+      }
+    },
+    {
+      "id": "q12",
+      "text": "Which evidence should support an expense reimbursement request?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000014": 3
+      }
+    },
+    {
+      "id": "q13",
+      "text": "How should I plan step-free boarding and transfers on a rail journey?",
+      "relevance": {
+        "00000000-0000-0000-0000-000000000016": 3,
+        "00000000-0000-0000-0000-000000000004": 1
+      }
+    },
+    {
+      "id": "no-answer",
+      "text": "How should a pediatric specialist treat a rare inherited blood disorder?",
+      "relevance": {}
+    },
+    {
+      "id": "empty",
+      "text": "   ",
+      "relevance": {}
+    }
+  ]
+}
