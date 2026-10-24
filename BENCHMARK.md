@@ -46,7 +46,7 @@ These fixture scores are not measured improvements over a prior version. The [di
 
 ## Regression coverage and CI
 
-`swift run LumaDeskChecks` runs the shared 59-check suite, including golden metric calculations, deduplication, baseline separation, corpus validation, real PDF/OCR imports, scoped fallback, and stale-vector invalidation when text changes under a stable passage ID. The same suite is invoked by XCTest on full Xcode installations. `python3 scripts/check-benchmark.py` runs 22 black-box CLI checks with only Python's standard library, including exact corpus checksums, missing-model reports, invalid inputs, deterministic BM25 rankings, and long-document candidate exhaustion.
+`swift run LumaDeskChecks` runs the shared 72-check suite, including golden metric calculations, deduplication, baseline separation, corpus validation, real PDF/OCR imports, scoped fallback, and stale-vector invalidation when text changes under a stable passage ID. The same suite is invoked by XCTest on full Xcode installations. `python3 scripts/check-benchmark.py` runs 22 black-box CLI checks with only Python's standard library, including exact corpus checksums, missing-model reports, invalid inputs, deterministic BM25 rankings, and long-document candidate exhaustion.
 
 The native macOS workflow runs these checks and uploads a short local-model report. There is deliberately no quality or latency pass threshold for this small fixture. A future quality gate needs a licensed representative corpus, independent judgments, a held-out set, and a defined hardware/model baseline.
 

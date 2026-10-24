@@ -13,7 +13,7 @@ This is a functional portfolio MVP, with no account, hosted backend, API key, te
 - **Native macOS product:** SwiftUI and AppKit workspace with PDFKit text extraction, Vision OCR, and Markdown export with source/page citations.
 - **Local information retrieval:** BM25 keyword ranking combined with NaturalLanguage sentence embeddings and cosine similarity; keyword search remains available when semantic search is unavailable.
 - **Responsive architecture:** actor-isolated retrieval, OCR and embedding work off the main actor, and debounced, cancellation-aware search presentation.
-- **Verification:** 59 shared validation assertions covering ranking, metric calculations, provenance, persistence, document import, and real OCR fixtures; 22 black-box benchmark CLI checks. [GitHub CI passed](https://github.com/Poojan-Desai/lumadesk/actions/runs/34150903363) for the original preview source revision; the new benchmark checks have been verified locally and await a remote CI run.
+- **Verification:** 72 shared validation assertions covering ranking, metric calculations, provenance, persistence, document import, and real OCR fixtures; 22 black-box benchmark CLI checks. [GitHub CI passed](https://github.com/Poojan-Desai/lumadesk/actions/runs/34150903363) for the original preview source revision; the new benchmark checks have been verified locally and await a remote CI run.
 - **Reproducible retrieval evaluation:** compare pure BM25, pure cosine, and the app's hybrid ranker on a versioned, original synthetic corpus; export graded Recall@5/NDCG@5, query timings, model coverage, hardware metadata, and a corpus checksum. See [evaluation protocol and limitations](BENCHMARK.md).
 
 **Release status:** v0.1.0 is a portfolio preview for Apple silicon and macOS 14+. The downloadable app has an ad-hoc signature; it is not Developer ID signed or notarized. See [build instructions](#build-a-launchable-app) for the reproducible source build and distribution limitations.
@@ -45,9 +45,9 @@ python3 scripts/check-benchmark.py
 swift test
 ```
 
-The shared suite performs 59 assertions covering segmentation boundaries and malformed parameters; Unicode token normalization; BM25 and semantic ranking; invalid vectors and empty queries; stable source/page provenance; JSON round trips; actual UTF-8/PDF import; actual Vision OCR on synthetic image and scanned-PDF fixtures; document-scoped retrieval; edited-passage vector invalidation; and deleted-source index removal. Evaluation checks include hand-calculated graded metrics, document deduplication, corpus validation, and model-unavailable behavior. It never reads personal documents. Temporary generated fixtures are removed afterward.
+The shared suite performs 72 assertions covering segmentation boundaries and malformed parameters; Unicode token normalization; BM25 and semantic ranking; invalid vectors and empty queries; stable source/page provenance; JSON round trips; actual UTF-8/PDF import; actual Vision OCR on synthetic image and scanned-PDF fixtures; document-scoped retrieval; edited-passage vector invalidation; and deleted-source index removal. Evaluation checks include hand-calculated graded metrics, document deduplication, corpus validation, and model-unavailable behavior. It never reads personal documents. Temporary generated fixtures are removed afterward.
 
-On the development Mac, all **59/59 shared checks and 22/22 benchmark CLI checks passed**, including real local embeddings and OCR. `swift test` was also attempted, but this machine's Command Line Tools installation lacks XCTest (`error: XCTest not available`). The standalone executable runs the same validation code and passed. This is an environment limitation, not a claim that XCTest ran.
+On the development Mac, all **72/72 shared checks and 22/22 benchmark CLI checks passed**, including real local embeddings and OCR. `swift test` was also attempted, but this machine's Command Line Tools installation lacks XCTest (`error: XCTest not available`). The standalone executable runs the same validation code and passed. This is an environment limitation, not a claim that XCTest ran.
 
 ## Build a launchable app
 
@@ -91,7 +91,7 @@ The interface explicitly reports **Semantic + keyword** or **Keyword search** fo
 - English semantic search only. Other text uses Unicode-aware keyword matching; stop-word filtering is English. Very short queries may be language-detected unexpectedly and use the keyword fallback.
 - OCR can miss or misread text. A PDF with embedded text uses that text and does not also OCR images on the same page; image annotations in mixed pages may therefore be absent.
 - Search surfaces excerpts; it is not a question-answering language model. It can miss or misrank results and cannot establish source truth. Embeddings remain in memory and are rebuilt at launch.
-- The local store is a single atomic JSON file. If it cannot be decoded, the app preserves it and blocks saving rather than overwriting it. Move or repair the file, then relaunch, to restore persistence.
+- The local store is a single atomic JSON file, written with owner-only file permissions. Loading and saving validate unique source IDs, unambiguous positive page numbers, and the documented text/page bounds. If it cannot be decoded or validated, the app preserves it and blocks saving rather than overwriting it. Move or repair the file, then relaunch, to restore persistence.
 - Keyboard navigation, labels, selection, and native controls are implemented. VoiceOver, localization, performance on large collections, signing, and security hardening still need broader production testing.
 
 ## Architecture
@@ -114,6 +114,12 @@ SwiftUI workspace + AppKit file/save panels
 ```
 
 `LumaCore` owns deterministic models and ranking. `LumaServices` owns Apple-framework integrations and the actor-isolated semantic index. The UI does not perform OCR or embedding work on its main actor. `LumaValidation` is a shared test fixture suite used by both XCTest and the dependency-free check executable.
+
+## October 2026 local reliability work
+
+The current local build adds a validated private snapshot store and clears pending search presentation before removing a source or rebuilding its index. A valid JSON file with duplicate source identities or page citations is treated as damaged data rather than indexed into ambiguous citations. Failed validation preserves the prior file; save uses a synchronized owner-only temporary file and an atomic rename. Original source paths remain unrecorded: moving or renaming an external file does not update a saved snapshot automatically.
+
+The shared checks now include actual save/reopen, corruption preservation, permissions, invalid-page/identity rejection, deletion persistence, temporary-file cleanup, and citation refresh after renamed titles, reordered pages, and revised OCR. See [audit and engineering stories](docs/HARDENING-2026-10.md). These changes have been verified locally; no new GitHub release or remote CI run is claimed.
 
 ## Portfolio discussion
 

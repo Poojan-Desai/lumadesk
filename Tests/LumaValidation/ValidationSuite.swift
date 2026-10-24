@@ -141,13 +141,20 @@ public enum ValidationSuite {
             check("Semantic baseline never silently substitutes keywords", unavailable.hits.isEmpty && unavailable.mode == "Semantic unavailable")
             let bm25 = await keywordEngine.search("documents private", documentID: nil, mode: .bm25, limit: 1)
             check("Engine exposes bounded pure BM25 without query vectors", bm25.hits.count == 1 && bm25.mode == "BM25 only" && !bm25.queryVectorAvailable)
+            let renamed = LibraryDocument(id: document.id, title: "Renamed source", kind: "PDF", pages: [
+                SourcePage(number: 2, text: "Documents stay on this device. Privacy matters.", extraction: "Revised OCR"),
+                SourcePage(number: 1, text: "Mountains and waterfalls", extraction: "PDF text")
+            ])
+            _ = await engine.rebuild([renamed])
+            let refreshed = await engine.search("privacy", documentID: document.id, mode: .bm25)
+            check("Rename, page reorder and OCR revisions refresh citations", refreshed.hits.first?.passage.documentTitle == "Renamed source" && refreshed.hits.first?.passage.page == 2 && refreshed.hits.first?.passage.extraction == "Revised OCR")
             _ = await engine.rebuild([])
             let removed = await engine.search("documents", documentID: nil)
             check("Removing sources clears searchable index", removed.hits.isEmpty)
         } catch {
             results.append(ValidationResult(name: "Synthetic import integration suite", passed: false, detail: error.localizedDescription))
         }
-        return results
+        return results + runPersistence()
     }
 }
 

@@ -27,10 +27,7 @@ final class WorkspaceModel: ObservableObject {
     init(storageURL: URL? = nil) {
         self.storageURL = storageURL ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("LumaDesk/library.json")
         do {
-            if FileManager.default.fileExists(atPath: self.storageURL.path) {
-                let data = try Data(contentsOf: self.storageURL)
-                documents = try JSONDecoder().decode([LibraryDocument].self, from: data)
-            }
+            documents = try LibraryStore(url: self.storageURL).load()
         } catch {
             persistenceBlocked = true
             errorMessage = "The saved library could not be read. It has not been overwritten. New work is available only for this session until the saved file is repaired or moved. \(error.localizedDescription)"
@@ -88,6 +85,7 @@ final class WorkspaceModel: ObservableObject {
 
     func remove(_ id: UUID) {
         guard !isBusy else { return }
+        invalidateSearch()
         documents.removeAll { $0.id == id }
         if selectedDocumentID == id { selectedDocumentID = nil }
         hits.removeAll { $0.passage.documentID == id }
@@ -97,6 +95,7 @@ final class WorkspaceModel: ObservableObject {
 
     func clearLibrary() {
         guard !isBusy else { return }
+        invalidateSearch()
         documents = []; hits = []; selectedDocumentID = nil; selectedHitID = nil
         persist()
         Task { await reindex() }
@@ -105,7 +104,7 @@ final class WorkspaceModel: ObservableObject {
     func queueSearch() {
         searchTask?.cancel()
         let input = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !input.isEmpty else { hits = []; selectedHitID = nil; isSearching = false; return }
+        guard !isBusy, !input.isEmpty else { hits = []; selectedHitID = nil; isSearching = false; return }
         let scope = selectedDocumentID
         isSearching = true
         searchTask = Task {
@@ -119,7 +118,13 @@ final class WorkspaceModel: ObservableObject {
         }
     }
 
+    private func invalidateSearch() {
+        searchTask?.cancel()
+        hits = []; selectedHitID = nil; isSearching = false
+    }
+
     private func reindex() async {
+        invalidateSearch()
         isBusy = true
         status = "Building your local search index…"
         embeddedPassages = await engine.rebuild(documents)
@@ -134,9 +139,7 @@ final class WorkspaceModel: ObservableObject {
             return
         }
         do {
-            try FileManager.default.createDirectory(at: storageURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-            let data = try JSONEncoder().encode(documents)
-            try data.write(to: storageURL, options: .atomic)
+            try LibraryStore(url: storageURL).save(documents)
         } catch { errorMessage = "Changes are available this session, but could not be saved: \(error.localizedDescription)" }
     }
 
