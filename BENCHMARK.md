@@ -34,19 +34,19 @@ JSON contains a schema version, exact corpus SHA-256, corpus license/provenance,
 
 Model availability, NaturalLanguage model revisions, language recognition, CPU load, and hardware can change results. The benchmark does not download a model. `--disable-semantics` provides a reproducible missing-model path and verifies that a semantic baseline never silently becomes a keyword baseline. Local example reports are in [Benchmarks](Benchmarks); rerun on your target Mac before drawing performance conclusions.
 
-Local release-build example, October 24, 2026: Apple M3 Pro (`Mac15,6`, arm64), English sentence embedding revision 1, 512 dimensions, all 17 passages embedded, five measured repetitions after one warmup per query. Quality means use the same 13 positive queries; latency summaries include all 15 queries and therefore include the empty-query control.
+Local release-build example, October 28, 2026: Apple M3 Pro (`Mac15,6`, arm64), English sentence embedding revision 1, 512 dimensions, all 17 passages embedded, five measured repetitions after one warmup per query. Quality means use the same 13 positive queries; latency summaries include all 15 queries and therefore include the empty-query control.
 
 | Mode | Recall@5 | NDCG@5 | Median query ms | P95 query ms |
 | --- | ---: | ---: | ---: | ---: |
-| BM25 | 1.0000 | 0.9928 | 1.603 | 2.212 |
-| Cosine | 0.9615 | 0.8769 | 6.394 | 7.383 |
-| Hybrid | 1.0000 | 1.0000 | 6.224 | 7.204 |
+| BM25 | 1.0000 | 0.9928 | 1.520 | 1.767 |
+| Cosine | 0.9615 | 0.8769 | 6.552 | 7.357 |
+| Hybrid | 1.0000 | 1.0000 | 6.596 | 7.467 |
 
-These fixture scores are not measured improvements over a prior version. The [disabled-model report](Benchmarks/disabled-model-macos-2026-10-24.json) marks semantic mode unavailable and records 15/15 hybrid keyword fallbacks, with no semantic quality means. [Raw local-model results](Benchmarks/local-model-macos-2026-10-24.json) retain every query, ranking, timing sample, and environment field. Corpus SHA-256: `ad93b9d0a99312cbad19c8f4a70cee565b302adc2dbc8c8231929765358295eb`.
+These fixture scores are not measured improvements over a prior version. The [disabled-model report](Benchmarks/disabled-model-macos-2026-10-28.json) marks semantic mode unavailable and records 15/15 hybrid keyword fallbacks, with no semantic quality means. [Raw local-model results](Benchmarks/local-model-macos-2026-10-28.json) retain every query, ranking, timing sample, and environment field. Corpus SHA-256: `ad93b9d0a99312cbad19c8f4a70cee565b302adc2dbc8c8231929765358295eb`.
 
 ## Regression coverage and CI
 
-`swift run LumaDeskChecks` runs the shared 72-check suite, including golden metric calculations, deduplication, baseline separation, corpus validation, real PDF/OCR imports, scoped fallback, and stale-vector invalidation when text changes under a stable passage ID. The same suite is invoked by XCTest on full Xcode installations. `python3 scripts/check-benchmark.py` runs 22 black-box CLI checks with only Python's standard library, including exact corpus checksums, missing-model reports, invalid inputs, deterministic BM25 rankings, and long-document candidate exhaustion.
+`swift run LumaDeskChecks` runs the shared 73-check suite, including golden metric calculations, deduplication, baseline separation, corpus validation, real PDF/OCR imports, scoped fallback, and stale-vector invalidation when text changes under a stable passage ID. The same suite is invoked by XCTest on full Xcode installations. `python3 scripts/check-benchmark.py` runs 22 black-box CLI checks with only Python's standard library, including exact corpus checksums, missing-model reports, invalid inputs, deterministic BM25 rankings, and long-document candidate exhaustion.
 
 The native macOS workflow runs these checks and uploads a short local-model report. There is deliberately no quality or latency pass threshold for this small fixture. A future quality gate needs a licensed representative corpus, independent judgments, a held-out set, and a defined hardware/model baseline.
 

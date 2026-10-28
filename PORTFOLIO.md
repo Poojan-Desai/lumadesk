@@ -27,7 +27,7 @@
 
 ## Verification
 
-The shared validation suite runs 59 assertions against generated PDFs and images through PDFKit and Vision, deterministic ranking, hand-calculated retrieval metrics, unavailable-model fallback, and stale-vector invalidation after text changes. A further 22 CLI checks verify reports, argument handling, deterministic BM25, and candidate coverage when one document has many passages. The benchmark compares BM25, cosine, and hybrid modes on 16 original synthetic documents and 15 queries, with hardware and model coverage recorded. These are engineering regression fixtures, not representative accuracy evidence; see [BENCHMARK.md](BENCHMARK.md). Full VoiceOver, latency benchmarks across hardware, representative public-corpus evaluation, and production security review remain future work.
+The shared validation suite runs 73 assertions against generated PDFs and images through PDFKit and Vision, deterministic ranking, hand-calculated retrieval metrics, unavailable-model fallback, stale-vector invalidation after text changes, private snapshot persistence, and corrupted/oversized snapshot preservation. A further 22 CLI checks verify reports, argument handling, deterministic BM25, and candidate coverage when one document has many passages. The benchmark compares BM25, cosine, and hybrid modes on 16 original synthetic documents and 15 queries, with hardware and model coverage recorded. These are engineering regression fixtures, not representative accuracy evidence; see [BENCHMARK.md](BENCHMARK.md). Full VoiceOver, latency benchmarks across hardware, representative public-corpus evaluation, and production security review remain future work.
 
 ## Next milestones
 
