@@ -8,14 +8,12 @@ import UniformTypeIdentifiers
 @MainActor
 final class WorkspaceModel: ObservableObject {
     @Published private(set) var documents: [LibraryDocument] = []
-    @Published var query = ""
-    @Published var selectedDocumentID: UUID?
+    @Published var query = "" { didSet { if oldValue != query { queueSearch() } } }
+    @Published var selectedDocumentID: UUID? { didSet { if oldValue != selectedDocumentID { queueSearch() } } }
     @Published var selectedHitID: String?
-    @Published private(set) var hits: [SearchHit] = []
+    @Published private var presentation = SearchPresentation()
     @Published private(set) var isBusy = false
-    @Published private(set) var isSearching = false
     @Published private(set) var status = "Ready when you are"
-    @Published private(set) var searchMode = "Keyword search"
     @Published private(set) var embeddedPassages = 0
     @Published var errorMessage: String?
     @Published var showPrivacy = false
@@ -23,25 +21,35 @@ final class WorkspaceModel: ObservableObject {
     private var searchTask: Task<Void, Never>?
     private let storageURL: URL
     private var persistenceBlocked = false
+    let isDemo: Bool
 
-    init(storageURL: URL? = nil) {
+    init(storageURL: URL? = nil, demoMode: Bool = false) {
+        isDemo = demoMode
         self.storageURL = storageURL ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("LumaDesk/library.json")
-        do {
-            documents = try LibraryStore(url: self.storageURL).load()
-        } catch {
-            persistenceBlocked = true
-            errorMessage = "The saved library could not be read. It has not been overwritten. New work is available only for this session until the saved file is repaired or moved. \(error.localizedDescription)"
+        if demoMode {
+            documents = SampleLibrary.documents
+        } else {
+            do {
+                documents = try LibraryStore(url: self.storageURL).load()
+            } catch {
+                persistenceBlocked = true
+                errorMessage = "The saved library could not be read. It has not been overwritten. New work is available only for this session until the saved file is repaired or moved. \(error.localizedDescription)"
+            }
         }
         Task { await reindex() }
     }
 
+    var hits: [SearchHit] { presentation.hits }
+    var isSearching: Bool { presentation.isSearching }
+    var searchMode: String { presentation.mode }
+    var canExportResults: Bool { !isBusy && presentation.exportRequest(query: query, documentID: selectedDocumentID) != nil }
     var selectedHit: SearchHit? { hits.first { $0.id == selectedHitID } }
     var selectedDocument: LibraryDocument? { documents.first { $0.id == selectedDocumentID } }
     var totalPages: Int { documents.reduce(0) { $0 + $1.pages.count } }
     var totalWords: Int { documents.reduce(0) { $0 + $1.wordCount } }
 
     func chooseFiles() {
-        guard !isBusy else { return }
+        guard !isBusy, !isDemo else { return }
         let panel = NSOpenPanel()
         panel.title = "Add documents to LumaDesk"
         panel.message = "Text is extracted on this Mac and saved in your local library."
@@ -55,8 +63,9 @@ final class WorkspaceModel: ObservableObject {
     }
 
     func importFiles(_ urls: [URL]) async {
-        guard !isBusy else { return }
+        guard !isBusy, !isDemo else { return }
         guard urls.count <= 20 else { errorMessage = "Import up to 20 files at a time."; return }
+        invalidateSearch()
         isBusy = true
         var failures: [String] = []
         for (index, url) in urls.enumerated() {
@@ -78,6 +87,7 @@ final class WorkspaceModel: ObservableObject {
 
     func loadSamples() {
         guard !isBusy else { return }
+        invalidateSearch()
         documents += SampleLibrary.documents.filter { sample in !documents.contains { $0.isSample && $0.title == sample.title } }
         persist()
         Task { await reindex() }
@@ -88,7 +98,6 @@ final class WorkspaceModel: ObservableObject {
         invalidateSearch()
         documents.removeAll { $0.id == id }
         if selectedDocumentID == id { selectedDocumentID = nil }
-        hits.removeAll { $0.passage.documentID == id }
         persist()
         Task { await reindex() }
     }
@@ -96,31 +105,26 @@ final class WorkspaceModel: ObservableObject {
     func clearLibrary() {
         guard !isBusy else { return }
         invalidateSearch()
-        documents = []; hits = []; selectedDocumentID = nil; selectedHitID = nil
+        documents = []; selectedDocumentID = nil; selectedHitID = nil
         persist()
         Task { await reindex() }
     }
 
     func queueSearch() {
-        searchTask?.cancel()
-        let input = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !isBusy, !input.isEmpty else { hits = []; selectedHitID = nil; isSearching = false; return }
-        let scope = selectedDocumentID
-        isSearching = true
+        invalidateSearch()
+        guard !isBusy, let request = presentation.begin(query: query, documentID: selectedDocumentID) else { return }
         searchTask = Task {
             do { try await Task.sleep(for: .milliseconds(220)) } catch { return }
-            let response = await engine.search(input, documentID: scope)
+            let response = await engine.search(request.query, documentID: request.documentID)
             guard !Task.isCancelled else { return }
-            hits = response.hits
-            searchMode = response.mode
+            guard presentation.finish(request, hits: response.hits, mode: response.mode) else { return }
             if !hits.contains(where: { $0.id == selectedHitID }) { selectedHitID = hits.first?.id }
-            isSearching = false
         }
     }
 
     private func invalidateSearch() {
         searchTask?.cancel()
-        hits = []; selectedHitID = nil; isSearching = false
+        presentation.invalidate(); selectedHitID = nil
     }
 
     private func reindex() async {
@@ -129,11 +133,12 @@ final class WorkspaceModel: ObservableObject {
         status = "Building your local search index…"
         embeddedPassages = await engine.rebuild(documents)
         isBusy = false
-        status = documents.isEmpty ? "Ready when you are" : "\(documents.count) sources · Everything stays on this Mac"
+        status = isDemo ? "Sample demo · Changes are not saved" : documents.isEmpty ? "Ready when you are" : "\(documents.count) sources · Everything stays on this Mac"
         queueSearch()
     }
 
     private func persist() {
+        guard !isDemo else { return }
         guard !persistenceBlocked else {
             errorMessage = "This session cannot be saved because the existing library could not be read. Move or repair ~/Library/Application Support/LumaDesk/library.json and relaunch. The original file has not been overwritten."
             return
@@ -144,11 +149,11 @@ final class WorkspaceModel: ObservableObject {
     }
 
     func exportResults() {
-        guard !hits.isEmpty else { return }
+        guard !isBusy, let request = presentation.exportRequest(query: query, documentID: selectedDocumentID) else { return }
         let panel = NSSavePanel()
         panel.allowedContentTypes = [UTType(filenameExtension: "md") ?? .plainText]
         panel.nameFieldStringValue = "LumaDesk-results.md"
-        let exported = "# LumaDesk search\n\nQuery: \(query)\nMode: \(searchMode)\n\nRanked source excerpts, not generated answers. Verify OCR against the original.\n\n" + hits.enumerated().map { index, hit in
+        let exported = "# LumaDesk search\n\nQuery: \(request.query)\nMode: \(searchMode)\n\nRanked source excerpts, not generated answers. Verify OCR against the original.\n\n" + hits.enumerated().map { index, hit in
             "## \(index + 1). \(hit.passage.documentTitle) — page \(hit.passage.page)\n\n\(hit.passage.text)\n\nExtraction: \(hit.passage.extraction)\n"
         }.joined(separator: "\n")
         panel.begin { [weak self] response in

@@ -26,12 +26,20 @@ swift run LumaDesk
 
 Choose **Try sample library**, then search **Where is my data stored?**. Use **⌘O** to import, **⌘F** to search, and **⇧⌘E** to export results. Samples and test documents are original synthetic fixtures.
 
+For an isolated recruiter demo, run `swift run LumaDesk --demo` or
+`open dist/LumaDesk.app --args --demo` after packaging. This mode starts with
+only the three original samples, never reads or writes the normal saved library,
+disables document import, and keeps changes in memory. The status bar identifies
+the sample demo. Relaunch without `--demo` for normal imports and persistence.
+
 To create a launchable application:
 
 ```sh
 bash scripts/package-app.sh
 open dist/LumaDesk.app
 ```
+
+The packaging script builds a clean staged bundle and archive, verifies the ad-hoc signature, then replaces the named outputs. Failed builds/signatures preserve the previous package; publication rename failures attempt to restore it. The bundle records source commit and whether the checkout was modified, and identifies this source preview as 0.2.0. These local renames are not a guarantee against abrupt power loss.
 
 The packaged preview uses an ad-hoc signature; it is not Developer ID signed or notarized. The existing [v0.1.0 release](https://github.com/Poojan-Desai/lumadesk/releases/tag/v0.1.0) predates the October reliability and benchmark work. Build the current source to use those changes.
 
@@ -41,10 +49,17 @@ The packaged preview uses an ad-hoc signature; it is not Developer ID signed or 
 swift run LumaDeskChecks
 swift build --product LumaBenchmark
 python3 scripts/check-benchmark.py
+python3 scripts/check-package.py  # isolated staging/failure checks, separate from real signing
 swift test  # Requires a full Xcode installation with XCTest.
 ```
 
 Local verification on **October 28, 2026** passed **73 shared validation assertions and 22 benchmark CLI checks**. Coverage includes real PDF extraction and Vision OCR, local embeddings, stale-vector invalidation, citation refresh, document scope, private persistence, corrupted/oversized snapshot preservation, hand-calculated retrieval metrics, and missing-model behavior. A release build of the application also passed. `swift test` could not run on this Command Line Tools installation because XCTest is unavailable; the standalone executable runs the same shared validation suite. The CI link above reports remote results separately.
+
+The **November 2, 2026** follow-up passes **83 shared validation assertions**.
+Ten new assertions exercise the actual search-presentation state used by the app:
+query/scope changes clear prior evidence, superseded responses cannot restore it,
+and exports require a completed matching request. The native app build also
+passes. These are shared state tests, not a complete automated SwiftUI UI suite.
 
 The benchmark compares isolated BM25, isolated cosine, and the app's hybrid ranker on **16 synthetic documents and 15 queries**. Reports retain Recall@5, graded NDCG@5, timing samples, embedding coverage, hardware/model metadata, and the corpus SHA-256. Undefined semantic scores remain absent when the model is unavailable. These small, author-judged fixtures validate the evaluation pipeline; they do not establish representative search quality. See [BENCHMARK.md](BENCHMARK.md) for reproducible commands, raw reports, and limitations.
 

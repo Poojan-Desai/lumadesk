@@ -28,8 +28,6 @@ struct WorkspaceView: View {
             .background(canvas)
         }
         .preferredColorScheme(.light)
-        .onChange(of: model.query) { _, _ in model.queueSearch() }
-        .onChange(of: model.selectedDocumentID) { _, _ in model.queueSearch() }
         .sheet(isPresented: $model.showPrivacy) { PrivacyView() }
         .alert("LumaDesk", isPresented: Binding(get: { model.errorMessage != nil }, set: { if !$0 { model.errorMessage = nil } })) {
             Button("OK", role: .cancel) { model.errorMessage = nil }
@@ -71,7 +69,7 @@ struct WorkspaceView: View {
                 Text("SOURCES").font(.system(size: 10, weight: .semibold)).tracking(1.8).foregroundStyle(.white.opacity(0.43))
                 Spacer()
                 Button { model.chooseFiles() } label: { Image(systemName: "plus").font(.system(size: 12)) }
-                    .buttonStyle(.plain).foregroundStyle(.white.opacity(0.7)).help("Import documents (⌘O)").accessibilityLabel("Import documents").disabled(model.isBusy)
+                    .buttonStyle(.plain).foregroundStyle(.white.opacity(0.7)).help("Import documents (⌘O)").accessibilityLabel("Import documents").disabled(model.isBusy || model.isDemo)
             }.padding(.top, 29).padding(.bottom, 10)
             ScrollView {
                 VStack(spacing: 4) {
@@ -125,7 +123,7 @@ struct WorkspaceView: View {
                 }
                 Spacer()
                 Button { model.chooseFiles() } label: { Label("Add documents", systemImage: "plus").font(.system(size: 12, weight: .semibold)).padding(.horizontal, 7).padding(.vertical, 5) }
-                    .buttonStyle(.borderedProminent).controlSize(.large).disabled(model.isBusy)
+                    .buttonStyle(.borderedProminent).controlSize(.large).disabled(model.isBusy || model.isDemo)
             }
             HStack(spacing: 12) {
                 Image(systemName: "magnifyingglass").font(.system(size: 19, weight: .medium)).foregroundStyle(.indigo)
@@ -311,7 +309,7 @@ struct WorkspaceView: View {
             HStack {
                 Button { NSPasteboard.general.clearContents(); NSPasteboard.general.setString("\(hit.passage.text)\n\n— \(hit.passage.documentTitle), page \(hit.passage.page)", forType: .string) } label: { Label("Copy citation", systemImage: "doc.on.doc") }.buttonStyle(.borderless)
                 Spacer()
-                Button { model.exportResults() } label: { Image(systemName: "square.and.arrow.up") }.buttonStyle(.borderless).accessibilityLabel("Export search results").help("Export all results (⇧⌘E)")
+                Button { model.exportResults() } label: { Image(systemName: "square.and.arrow.up") }.buttonStyle(.borderless).disabled(!model.canExportResults).accessibilityLabel("Export search results").help("Export all results (⇧⌘E)")
             }.font(.system(size: 11)).padding(20)
         }.background(.white)
     }
@@ -321,7 +319,7 @@ struct WorkspaceView: View {
             if model.isBusy { ProgressView().controlSize(.mini) } else { Image(systemName: "checkmark.circle.fill").foregroundStyle(Color(red: 0.2, green: 0.5, blue: 0.4)) }
             Text(model.status).lineLimit(1)
             Spacer()
-            Text("LumaDesk 1.0 · Portfolio preview").foregroundStyle(muted.opacity(0.7))
+            Text("LumaDesk 0.2.0 · Portfolio preview").foregroundStyle(muted.opacity(0.7))
         }.font(.system(size: 10)).foregroundStyle(muted).padding(.horizontal, 24).frame(height: 35).background(.white.opacity(0.6))
     }
 }

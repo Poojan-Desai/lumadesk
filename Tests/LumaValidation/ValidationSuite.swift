@@ -59,7 +59,7 @@ public enum ValidationSuite {
             let restored = try JSONDecoder().decode([LibraryDocument].self, from: data)
             check("Persistence round trip retains complete source content", restored == documents)
         } catch { check("Persistence round trip retains complete source content", false, error.localizedDescription) }
-        return results + runEvaluation()
+        return results + runEvaluation() + runSearchPresentation()
     }
 
     @MainActor
