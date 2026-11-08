@@ -59,7 +59,7 @@ public enum ValidationSuite {
             let restored = try JSONDecoder().decode([LibraryDocument].self, from: data)
             check("Persistence round trip retains complete source content", restored == documents)
         } catch { check("Persistence round trip retains complete source content", false, error.localizedDescription) }
-        return results + runEvaluation() + runSearchPresentation()
+        return results + runEvaluation() + runSearchPresentation() + runLexicalIndex()
     }
 
     @MainActor
@@ -131,6 +131,8 @@ public enum ValidationSuite {
             _ = await engine.rebuild([replacement, imageDocument])
             let replaced = await engine.search("private documents", documentID: document.id, mode: .semantic)
             check("Edited passage text invalidates vectors under stable IDs", replaced.eligiblePassages == 1 && replaced.embeddedPassages == 0 && replaced.hits.isEmpty, "Original embedded passages: \(count); replacement is Japanese and excluded from the English semantic index")
+            let obsoleteKeywords = await engine.search("privacy", documentID: document.id, mode: .bm25)
+            check("Engine rebuild invalidates cached lexical terms after an edit", obsoleteKeywords.hits.isEmpty && obsoleteKeywords.eligiblePassages == 1)
             let keywordEngine = RetrievalEngine(semanticEnabled: false)
             _ = await keywordEngine.rebuild([document, imageDocument])
             let coverage = await keywordEngine.coverage()
