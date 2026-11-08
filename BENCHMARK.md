@@ -30,7 +30,7 @@ The default [CC0 fixture](Sources/LumaBenchmark/Fixtures/english-v1.json) contai
 
 ## Measurements and provenance
 
-JSON contains a schema version, exact corpus SHA-256, corpus license/provenance, OS and hardware, model revision/dimension, embedding coverage, per-query document IDs, and raw timing samples. Query latency includes actor dispatch, query embedding, and ranking after configured warmups; segmentation and passage embedding are measured separately as index time. Model initialization has its own duration. Median and P95 use the nearest-rank method. Peak RSS is Darwin's whole-process lifetime high-water mark in bytes, shared across all sequential modes; it is not per-mode memory use. Release/debug configuration and repetitions are recorded.
+JSON contains a schema version, exact corpus SHA-256, corpus license/provenance, OS and hardware, model revision/dimension, embedding coverage, per-query document IDs, and raw timing samples. Query latency includes actor dispatch, query embedding, and ranking after configured warmups; segmentation, lexical-statistics construction, and passage embedding are measured separately as index time. Model initialization has its own duration. Median and P95 use the nearest-rank method. Peak RSS is Darwin's whole-process lifetime high-water mark in bytes, shared across all sequential modes; it is not per-mode memory use. Release/debug configuration and repetitions are recorded.
 
 Model availability, NaturalLanguage model revisions, language recognition, CPU load, and hardware can change results. The benchmark does not download a model. `--disable-semantics` provides a reproducible missing-model path and verifies that a semantic baseline never silently becomes a keyword baseline. Local example reports are in [Benchmarks](Benchmarks); rerun on your target Mac before drawing performance conclusions.
 
@@ -53,3 +53,13 @@ The native macOS workflow runs these checks and uploads a short local-model repo
 ## Custom corpus
 
 Use schema `lumadesk-evaluation/v1` and the bundled JSON structure. Required fields are a name, provenance, license, 1–500 uniquely identified UUID documents with nonempty titled pages, and 1–200 uniquely named queries. Page numbers must be positive and unique per document. Each query maps corpus document UUIDs to integer grades 0–3. Blank query text and empty judgments are allowed as explicit controls. Limits are 500 query characters, two million document characters, and five MB of input JSON. Invalid corpus data or options exit nonzero without writing a report.
+
+## Keyword index optimization — November 7, 2026
+
+The local portfolio review reuses lexical term counts/lengths across queries and
+skips language recognition for pure BM25 and missing-model searches. Raw before
+and after reports, paired with identical corpus hashes and query rankings, are in
+[the keyword-cache evidence directory](Benchmarks/keyword-cache-2026-11-07).
+See [validation notes](docs/VERIFICATION-2026-11-07.md) before quoting latency: this
+is a small repeated-query microbenchmark and does not measure UI latency, real
+search quality, or a general speedup for semantic search.

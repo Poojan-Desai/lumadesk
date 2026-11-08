@@ -20,6 +20,7 @@ public struct IndexCoverage: Codable, Sendable {
 
 public actor RetrievalEngine {
     private var passages: [Passage] = []
+    private var lexicalIndex = LexicalSearchIndex(passages: [])
     private var vectors: [String: [Double]] = [:]
     private let embedding: NLEmbedding?
 
@@ -48,18 +49,26 @@ public actor RetrievalEngine {
             }
         }
         passages = next
+        lexicalIndex = LexicalSearchIndex(passages: next)
         return vectors.count
     }
 
     public func search(_ query: String, documentID: UUID?, mode: RetrievalMode = .hybrid, limit: Int = 12) -> RetrievalResponse {
         let scoped = passages.filter { documentID == nil || $0.documentID == documentID }
-        let recognizer = NLLanguageRecognizer()
-        recognizer.processString(query)
-        let language = recognizer.dominantLanguage
-        let vector = mode != .bm25 && (language == .english || language == nil) ? embedding?.vector(for: query) : nil
+        let vector: [Double]?
+        // Keyword-only and missing-model searches do not consume language or
+        // semantic signals, so avoid running language recognition for them.
+        if mode != .bm25, let embedding {
+            let recognizer = NLLanguageRecognizer()
+            recognizer.processString(query)
+            let language = recognizer.dominantLanguage
+            vector = (language == .english || language == nil) ? embedding.vector(for: query) : nil
+        } else {
+            vector = nil
+        }
         let hasSemantic = vector != nil && scoped.contains { vectors[$0.id] != nil }
         return RetrievalResponse(
-            hits: SearchRanking.search(query: query, passages: scoped, queryVector: hasSemantic ? vector : nil, vectors: vectors, limit: limit, mode: mode),
+            hits: lexicalIndex.search(query: query, documentID: documentID, queryVector: hasSemantic ? vector : nil, vectors: vectors, limit: limit, mode: mode),
             mode: mode == .bm25 ? "BM25 only" : mode == .semantic ? (hasSemantic ? "Semantic only" : "Semantic unavailable") : (hasSemantic ? "Semantic + keyword" : "Keyword search"),
             queryVectorAvailable: vector != nil,
             eligiblePassages: scoped.count,

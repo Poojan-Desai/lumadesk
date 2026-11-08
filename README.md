@@ -63,6 +63,22 @@ passes. These are shared state tests, not a complete automated SwiftUI UI suite.
 
 The benchmark compares isolated BM25, isolated cosine, and the app's hybrid ranker on **16 synthetic documents and 15 queries**. Reports retain Recall@5, graded NDCG@5, timing samples, embedding coverage, hardware/model metadata, and the corpus SHA-256. Undefined semantic scores remain absent when the model is unavailable. These small, author-judged fixtures validate the evaluation pipeline; they do not establish representative search quality. See [BENCHMARK.md](BENCHMARK.md) for reproducible commands, raw reports, and limitations.
 
+## November 7 portfolio review
+
+The review branch caches immutable lexical statistics at library rebuild and
+skips language recognition when a search cannot use embeddings. It passes **92
+shared assertions**, **22 benchmark CLI checks**, **24 isolated packaging checks**
+and a native release app build. XCTest remains unavailable on this Command Line
+Tools installation; the shared executable was run instead.
+
+In two same-host release trials on the original 16-document/15-query synthetic
+fixture, pure BM25 engine median latency changed from 2.138/2.088 ms to
+0.0305/0.0308 ms. All 45 query-mode top-five document rankings and quality scores
+match the fresh baseline. This measures a small keyword-engine workload, not
+whole-app responsiveness or representative retrieval quality. Cache construction
+adds index work and memory; the UI's 220 ms debounce remains. See
+[review evidence](docs/VERIFICATION-2026-11-07.md) for raw reports and caveats.
+
 ## Architecture
 
 ```text
